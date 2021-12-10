@@ -16,16 +16,16 @@
       <template v-for="(item, index) in userMenu" :key="item.id">
         <el-sub-menu :index="index + ''">
           <template #title>
-            <el-icon v-if="item.icon.substring(8) === 'monitor'"
+            <el-icon v-if="item.icon === 'el-icon-monitor'"
               ><monitor></monitor
             ></el-icon>
-            <el-icon v-else-if="item.icon.substring(8) === 'setting'"
+            <el-icon v-else-if="item.icon === 'el-icon-setting'"
               ><setting></setting
             ></el-icon>
-            <el-icon v-else-if="item.icon.substring(8) === 'goods'"
+            <el-icon v-else-if="item.icon === 'el-icon-goods'"
               ><goods></goods
             ></el-icon>
-            <el-icon v-if="item.icon.substring(8) === 'chat-line-round'"
+            <el-icon v-else-if="item.icon === 'el-icon-chat-line-round'"
               ><chatLineRound></chatLineRound
             ></el-icon>
             <span>{{ item.name }}</span>
