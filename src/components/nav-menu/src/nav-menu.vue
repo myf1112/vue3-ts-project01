@@ -14,7 +14,7 @@
       active-text-color="#0a60bd"
     >
       <template v-for="(item, index) in userMenu" :key="item.id">
-        <el-sub-menu :index="index">
+        <el-sub-menu :index="index + ''">
           <template #title>
             <el-icon v-if="item.icon.substring(8) === 'monitor'"
               ><monitor></monitor

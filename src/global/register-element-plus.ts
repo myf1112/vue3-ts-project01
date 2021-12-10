@@ -53,7 +53,6 @@ const components = [
   ElMenuItem,
   ElMenuItemGroup,
   ElSubMenu,
-  ElIcon,
   Monitor,
   Setting,
   Goods,
