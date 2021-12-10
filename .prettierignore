@@ -1,0 +1,10 @@
+/dist/*
+.local
+.output.js
+vue.config.js
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
