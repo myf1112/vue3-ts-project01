@@ -1,7 +1,8 @@
 // vuex的根
-import { createStore } from 'vuex';
-import { IRootState } from './type';
+import { createStore, Store } from 'vuex';
+import { IRootState, IRootWithModule } from './type';
 import loginModule from './login';
+import { useStore as useVuexStore } from 'vuex';
 
 const store = createStore<IRootState>({
   state() {
@@ -18,4 +19,7 @@ export function setupState() {
   store.dispatch('loginModule/loadLocalLoading');
 }
 
+export function useStore(): Store<IRootWithModule> {
+  return useVuexStore();
+}
 export default store;

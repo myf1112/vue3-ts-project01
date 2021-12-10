@@ -28,7 +28,7 @@ export function requestUserInfoById(id: number) {
 
 export function requestUserMenusById(id: number) {
   return myRequest.get<IDataType<any>>({
-    url: `${LoginAPI.UserMenus}${id}menu`,
+    url: `${LoginAPI.UserMenus}${id}/menu`,
     isShowLoading: false
   });
 }

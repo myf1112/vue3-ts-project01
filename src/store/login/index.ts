@@ -51,7 +51,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       myStorage.setItem('userInfo', realUserInfo);
       commit('changeUserInfo', realUserInfo);
 
-      const originUserMenu = await requestUserMenusById(id);
+      const originUserMenu = await requestUserMenusById(realUserInfo.role.id);
       const realUserMenu = originUserMenu.data;
       myStorage.setItem('userMenu', realUserMenu);
       commit('changeUserMenu', originUserMenu);
