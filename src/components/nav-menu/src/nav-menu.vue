@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 <template>
   <div class="nav-menu">
     <div class="logo">
@@ -6,7 +7,7 @@
     </div>
 
     <el-menu
-      default-active="2"
+      :default-active="index"
       class="el-menu-vertical-demo"
       :collapse="isFold"
       background-color="#0c2135"
@@ -34,6 +35,7 @@
             :index="index + '-' + subIndex"
             v-for="(subItem, subIndex) in item.children"
             :key="subItem.id"
+            @click="handleRouteChange(subItem)"
             >{{ subItem.name }}</el-menu-item
           >
         </el-sub-menu>
@@ -45,6 +47,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue';
 import { useStore } from '@/store';
+import { useRoute, useRouter } from 'vue-router';
+import { pathToCurrentIndex } from '@/utils/menu-to-route';
 export default defineComponent({
   props: {
     isFold: {
@@ -53,12 +57,26 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
+    const index = computed(() => {
+      return pathToCurrentIndex(currentPath, userMenu.value) ?? '0-0';
+    });
+    const route = useRoute();
+    const currentPath = route.path;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleRouteChange = (subItem: any) => {
+      router.push({
+        path: subItem.url ?? '/not-found'
+      });
+    };
     const userMenu = computed(() => {
       return store.state.loginModule.userMenu;
     });
 
     return {
-      userMenu
+      userMenu,
+      handleRouteChange,
+      index
     };
   }
 });

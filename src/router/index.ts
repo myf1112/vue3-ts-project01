@@ -12,7 +12,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'login',
     component: () => import('../views/login/login.vue')
   },
-  { path: '/main', name: 'main', component: () => import('../views/main/main.vue') }
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import('../views/main/main.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    component: () => import('@/views/not-found/not-found.vue')
+  }
 ];
 
 const router = createRouter({
@@ -26,6 +35,9 @@ router.beforeEach((to) => {
     if (!token) {
       return '/login';
     }
+  }
+  if (to.path == '/main') {
+    return '/main/analysis/overview';
   }
 });
 

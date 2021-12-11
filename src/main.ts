@@ -6,6 +6,7 @@ import registerGlobal from '@/global';
 
 import 'normalize.css';
 import '@/assets/css/index.less';
+import { menuToRoute } from './utils/menu-to-route';
 
 const app = createApp(App);
 app.use(registerGlobal);

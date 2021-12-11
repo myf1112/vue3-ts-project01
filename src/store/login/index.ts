@@ -6,7 +6,9 @@ import {
   requestUserInfoById,
   requestUserMenusById
 } from '@/service/login';
+import { menuToRoute } from '@/utils/menu-to-route';
 import myStorage from '@/utils/my-storage';
+import { RouteRecordRaw } from 'vue-router';
 import { Module } from 'vuex';
 import { IRootState } from '../type';
 import { IAccountLogin, ILoginState } from './type';
@@ -29,6 +31,12 @@ const loginModule: Module<ILoginState, IRootState> = {
       state.userInfo = userInfo;
     },
     changeUserMenu(state, userMenu: any) {
+      const userRoutes: RouteRecordRaw[] = menuToRoute(
+        JSON.parse(JSON.stringify(userMenu))
+      );
+      for (const route of userRoutes) {
+        router.addRoute('main', route);
+      }
       state.userMenu = userMenu;
     }
   },

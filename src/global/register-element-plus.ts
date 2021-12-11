@@ -4,7 +4,12 @@ import {
   ElAside,
   ElButton,
   ElCheckbox,
+  ElCol,
   ElContainer,
+  ElDatePicker,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
   ElForm,
   ElFormItem,
   ElHeader,
@@ -14,6 +19,9 @@ import {
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
+  ElOption,
+  ElRow,
+  ElSelect,
   ElSubMenu,
   ElTable
 } from 'element-plus/lib/components';
@@ -29,7 +37,9 @@ import {
   Goods,
   ChatLineRound,
   Tickets,
-  Reading
+  Reading,
+  ArrowDown,
+  Avatar
 } from '@element-plus/icons';
 
 const components = [
@@ -58,7 +68,17 @@ const components = [
   Goods,
   ChatLineRound,
   Tickets,
-  Reading
+  Reading,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
+  ArrowDown,
+  Avatar,
+  ElCol,
+  ElRow,
+  ElSelect,
+  ElOption,
+  ElDatePicker
 ];
 
 export function registerElementPlus(app: App): void {
