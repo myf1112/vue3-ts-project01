@@ -1,6 +1,6 @@
 import myStorage from '@/utils/my-storage';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-
+import { firstRoute } from '@/utils/menu-to-route';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -37,7 +37,8 @@ router.beforeEach((to) => {
     }
   }
   if (to.path == '/main') {
-    return '/main/analysis/overview';
+
+    return firstRoute.path;
   }
 });
 

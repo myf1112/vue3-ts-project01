@@ -48,7 +48,7 @@
 import { computed, defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { useRoute, useRouter } from 'vue-router';
-import { pathToCurrentIndex } from '@/utils/menu-to-route';
+import { pathToCurrentIndexAndBread } from '@/utils/menu-to-route';
 export default defineComponent({
   props: {
     isFold: {
@@ -58,17 +58,20 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const router = useRouter();
+    // 通过当前的路径获得index（我们需要传入当前的菜单和路径）。
     const index = computed(() => {
-      return pathToCurrentIndex(currentPath, userMenu.value) ?? '0-0';
+      return pathToCurrentIndexAndBread(currentPath, userMenu.value) ?? '0-0';
     });
     const route = useRoute();
     const currentPath = route.path;
+    // 监听按钮的点击，切换路由。
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleRouteChange = (subItem: any) => {
       router.push({
         path: subItem.url ?? '/not-found'
       });
     };
+    // 获取当前的菜单，注意从state中获取数据都需要使用计算属性。
     const userMenu = computed(() => {
       return store.state.loginModule.userMenu;
     });

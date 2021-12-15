@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RouteRecordRaw } from 'vue-router';
-
+import { ICurrentName } from './types/current-name';
+// !1.通过菜单注册路由，并且保存第一个路由。
+let firstRoute: RouteRecordRaw;
 export function menuToRoute(userMenus: any[]): RouteRecordRaw[] {
   // 先拿到所有的路由
   const allRoutes: RouteRecordRaw[] = [];
@@ -18,6 +20,9 @@ export function menuToRoute(userMenus: any[]): RouteRecordRaw[] {
       if (menu.type === 2) {
         const routeI = allRoutes.find((route) => route.path === menu.url);
         if (routeI) {
+          if (!firstRoute) {
+            firstRoute = routeI;
+          }
           userRoutes.push(routeI);
         }
       } else recurseGetRoute(menu.children);
@@ -29,21 +34,34 @@ export function menuToRoute(userMenus: any[]): RouteRecordRaw[] {
   return userRoutes;
 }
 
-export function pathToCurrentIndex(path: string, userMenus: any) {
+// !2.通过当前路径找出当前的index以及name。
+export function pathToCurrentIndexAndBread(
+  path: string,
+  userMenus: any,
+  name = false
+) {
   let i = -1;
-
-  console.log(path, userMenus);
 
   for (const menu of userMenus) {
     i++;
     let j = -1;
     for (const submenu of menu.children) {
       j++;
+      const breadConfig: ICurrentName[] = [];
+      breadConfig.push(
+        { path: submenu.url, name: menu.name },
+        { path: submenu.url, name: submenu.name }
+      );
       if (submenu.url === path) {
-        console.log(`${i}-${j}`);
-
-        return `${i}-${j}`;
+        if (!name) {
+          return `${i}-${j}`;
+        } else {
+          return breadConfig;
+        }
       }
     }
   }
 }
+
+// 额，不用想那么多，直接无脑导出就行了。
+export { firstRoute };

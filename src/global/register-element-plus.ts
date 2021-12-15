@@ -2,6 +2,8 @@
 // 需要同时导入css。（方便管理，其实css在哪里导入都是可以的。）
 import {
   ElAside,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
   ElButton,
   ElCheckbox,
   ElCol,
@@ -78,7 +80,9 @@ const components = [
   ElRow,
   ElSelect,
   ElOption,
-  ElDatePicker
+  ElDatePicker,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 ];
 
 export function registerElementPlus(app: App): void {
