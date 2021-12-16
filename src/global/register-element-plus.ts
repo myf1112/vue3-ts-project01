@@ -22,10 +22,12 @@ import {
   ElMenuItem,
   ElMenuItemGroup,
   ElOption,
+  ElPagination,
   ElRow,
   ElSelect,
   ElSubMenu,
-  ElTable
+  ElTable,
+  ElTableColumn
 } from 'element-plus/lib/components';
 import { App } from 'vue';
 import 'element-plus/theme-chalk/base.css';
@@ -82,7 +84,9 @@ const components = [
   ElOption,
   ElDatePicker,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElTableColumn,
+  ElPagination
 ];
 
 export function registerElementPlus(app: App): void {
