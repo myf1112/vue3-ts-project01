@@ -16,6 +16,7 @@
                 :placeholder="item.placeholder"
                 v-bind="item.otherOptions"
                 v-model="formData[`${item.field}` ?? '']"
+                style="width: 100%"
               ></el-input>
               <el-select
                 v-else-if="item.type === 'select'"
@@ -86,7 +87,6 @@ export default defineComponent({
     watch(
       formData,
       (newValue) => {
-
         emit('update:myFormData', newValue);
       },
       { deep: true }
@@ -99,5 +99,12 @@ export default defineComponent({
 <style scoped>
 .my-form {
   padding-top: 22px;
+}
+.el-form {
+  display: flex;
+  justify-content: center;
+}
+.el-row {
+  margin-top: 20px;
 }
 </style>

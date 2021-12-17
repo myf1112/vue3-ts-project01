@@ -2,9 +2,11 @@ export const pageContentConfig = {
   title: '用户列表',
   propList: [
     { prop: 'name', label: '用户名', minWidth: '100' },
-    { prop: 'realname', label: '真实姓名', minWidth: '100' },
-    { prop: 'cellphone', label: '手机号码', minWidth: '100' },
-    { prop: 'enable', label: '状态', minWidth: '100', slotName: 'state' },
+    { prop: 'oldPrice', label: '原价', minWidth: '100' },
+    { prop: 'newPrice', label: '打折后', minWidth: '100' },
+    { prop: 'imgUrl', label: '图片', minWidth: '100', slotName: 'img' },
+    { prop: 'address', label: '发货地', minWidth: '100' },
+
     {
       prop: 'createAt',
       label: '创建时间',

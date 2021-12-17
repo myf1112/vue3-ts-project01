@@ -7,6 +7,7 @@ export interface IFormItem {
   label: string;
   placeholder?: string;
   rules?: any[];
+  field?: string;
 
   options?: any[];
 

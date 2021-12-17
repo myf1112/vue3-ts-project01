@@ -13,7 +13,7 @@ const store = createStore<IRootState>({
   },
   mutations: {},
   actions: {},
-  modules: { loginModule,systemModule }
+  modules: { loginModule,systemModule}
 });
 
 export function setupState() {

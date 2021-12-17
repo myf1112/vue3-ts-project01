@@ -1,43 +1,41 @@
 <template>
-  <div class="user">
-    <div class="page-search">
-      <mySearchVue :search-config="userSearchConfig"></mySearchVue>
+  <div class="users">
+    <div class="search">
+      <mySearchVue
+        :search-config="userSearchConfig"
+        @handle-search-click="newSearchQuery"
+        @handle-reset-click="newResetQuery"
+      ></mySearchVue>
     </div>
     <div class="table">
       <pageContentVue
         :pageContentConfig="pageContentConfig"
-        :pageListData="allUserListData"
+        :page-name="'users'"
+        ref="pageContentRef"
       ></pageContentVue>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 
 import userSearchConfig from './config/search-config';
-import { useStore } from '@/store';
 import pageContentVue from '@/components/page-content';
 import { pageContentConfig } from './config/page-content-config';
 import mySearchVue from '@/components/my-search';
+import { usePageSearch } from '@/hooks/usePageSearch';
 export default defineComponent({
   name: 'user',
-  components: { pageContentVue,mySearchVue },
+  components: { pageContentVue, mySearchVue },
   setup() {
-    // 将allUserListData传过去
-    const store = useStore();
-    store.dispatch('systemModule/allUserListAction', {
-      offset: 0,
-      size: 10
-    });
-    const allUserListData = computed(() => {
-      return store.state.systemModule.allUserList;
-    });
-
+    const [pageContentRef, newResetQuery, newSearchQuery] = usePageSearch();
     return {
       userSearchConfig,
-      allUserListData,
-      pageContentConfig
+      pageContentConfig,
+      newSearchQuery,
+      newResetQuery,
+      pageContentRef
     };
   }
 });

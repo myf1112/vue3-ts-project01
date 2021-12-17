@@ -15,6 +15,7 @@ import {
   ElForm,
   ElFormItem,
   ElHeader,
+  ElImage,
   ElInput,
   ElLink,
   ElMain,
@@ -86,7 +87,8 @@ const components = [
   ElBreadcrumb,
   ElBreadcrumbItem,
   ElTableColumn,
-  ElPagination
+  ElPagination,
+  ElImage
 ];
 
 export function registerElementPlus(app: App): void {

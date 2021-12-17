@@ -11,7 +11,10 @@
         </template>
         <template #foot>
           <div class="search-foot">
-            <SearchFoot></SearchFoot>
+            <SearchFoot
+              @resetClick="handleResetClick"
+              @searchClick="handleSearchClick"
+            ></SearchFoot>
           </div> </template
       ></MyFormVue>
     </div>
@@ -24,7 +27,7 @@ import MyFormVue from '@/base-ui/my-form';
 import { IFormConfig } from '../types/type';
 import SearchHeader from './search-header.vue';
 import SearchFoot from './search-foot.vue';
-import userSearchConfig from '@/views/main/system/user/config/search-config';
+
 export default defineComponent({
   props: {
     searchConfig: {
@@ -32,22 +35,37 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
-    // 动态地绑定数据。
+  setup(props, { emit }) {
+    //?1.动态地绑定数据。
     // !这里可不能用computed，好好想想。
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formDataOrigin: any = {};
-    for (const item of userSearchConfig.formItems) {
+
+    for (const item of props.searchConfig.formItems) {
       if (item.field) {
         formDataOrigin[item.field] = '';
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formData: any = ref({ ...formDataOrigin });
-
-    return { formData };
+    // ?1.处理重置按钮,这里我们的formDataOrigin是一个空的对象（但是有键）。
+    // 不过同时我们还是得重新发送一次请求，所以，还是得发送给user。
+    const handleResetClick = () => {
+      for (const key in formDataOrigin) {
+        formData.value[`${key}`] = formDataOrigin[`${key}`];
+      }
+      emit('handleResetClick');
+    };
+    // ?2.处理搜索按钮，说白了就是重新请求一次数据，把formData给它发过去。
+    // 由于需要让content重新发起请求，所以我们需要将它继续传给父亲。
+    const handleSearchClick = () => {
+      emit('handleSearchClick', { ...formData.value });
+    };
+    return { formData, handleResetClick, handleSearchClick };
   },
-  components: { MyFormVue, SearchHeader, SearchFoot }
+  components: { MyFormVue, SearchHeader, SearchFoot },
+  emits: ['handleSearchClick', 'handleResetClick']
 });
 </script>
 

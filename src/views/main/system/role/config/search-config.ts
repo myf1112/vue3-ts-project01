@@ -3,30 +3,26 @@ import { IFormConfig } from '@/base-ui/my-form/types/type';
 const userSearchConfig: IFormConfig = {
   labelWidth: '120px',
   itemStyle: {
-    padding: '10px 40px'
+    padding: '10px 40px',
+    minWidth: '150px'
   },
-  // colLayout: {
-  //   span: 8
-  // },
+  colLayout: {
+    span: 8
+  },
   formItems: [
     {
       field: 'name',
       type: 'input',
-      label: '用户名',
+      label: '角色名',
       placeholder: '请输入用户名'
     },
     {
-      field: 'cellphone',
+      field: 'intro',
       type: 'input',
-      label: '手机号码',
-      placeholder: '请输入手机号码'
+      label: '权限',
+      placeholder: '请输入权限'
     },
-    {
-      field: 'realName',
-      type: 'input',
-      label: '真实姓名',
-      placeholder: '请输入真实姓名'
-    },
+
     {
       field: 'data',
       type: 'datepicker',

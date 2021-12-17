@@ -4,7 +4,7 @@
       <slot name="header">
         <div class="title">{{ title }}</div>
         <div class="handler">
-          <slot name="handler"></slot>
+          <slot name="header-handler"></slot>
         </div>
       </slot>
     </div>
@@ -25,7 +25,11 @@
         <template v-for="propItem in propList" :key="propItem.prop">
           <!-- prop表示需要展示我们传过去的数据的哪几列，比如不传id，就不会展示id这一列 -->
           <!-- 灵活使用v-bind来帮顶属性 -->
-          <el-table-column v-bind="propItem" align="center">
+          <el-table-column
+            v-bind="propItem"
+            align="center"
+            show-overflow-tooltip
+          >
             <!-- 这是使用el-table-column给我们封装的作用域插槽 -->
             <!-- scope.row就表示了这一整行的数据 -->
             <!-- <template #default="scope">{{scope.row[propItem.prop]}}</template> -->
