@@ -63,5 +63,21 @@ export function pathToCurrentIndexAndBread(
   }
 }
 
+export function userMenuToPermissions(userMenus: any[]) {
+  const permissions: any[] = [];
+  function _recursePermissions(userMenu: any[]) {
+    for (const menu of userMenu) {
+      if (menu.type === 1 || menu.type === 2) {
+        // 千万别忘了这里需要判断是否还有children，不然肯定会报错的啊。
+        _recursePermissions(menu.children ?? []);
+      } else if (menu.type === 3) {
+        permissions.push(menu.permission);
+      }
+    }
+  }
+  _recursePermissions(userMenus);
+  return permissions;
+}
+
 // 额，不用想那么多，直接无脑导出就行了。
 export { firstRoute };

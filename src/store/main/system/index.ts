@@ -2,7 +2,7 @@
 import { Module } from 'vuex';
 import { IRootState } from '@/store/type';
 import { ISystemState } from './type';
-import { allUserListRequest } from '@/service/main/system';
+import { allUserListRequest, deletePageData } from '@/service/main/system';
 
 const systemModule: Module<ISystemState, IRootState> = {
   namespaced: true,
@@ -118,6 +118,14 @@ const systemModule: Module<ISystemState, IRootState> = {
           commit('changeAllCategoryCount', allPageCount);
           break;
       }
+    },
+    async deletePageListAction({ dispatch }, payload) {
+      const pageName = payload.pageName;
+      const id = payload.id;
+
+      const pageUrl = `/${pageName}/${id}`;
+
+      deletePageData(pageUrl);
     }
   }
 };

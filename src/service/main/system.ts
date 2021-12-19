@@ -17,3 +17,9 @@ export function allUserListRequest(url: string, queryInfo?: any) {
     isShowLoading: false
   });
 }
+
+export function deletePageData(url:string){
+  return myRequest.delete({
+    url:url
+  })
+}

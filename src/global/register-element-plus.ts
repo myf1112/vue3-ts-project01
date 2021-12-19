@@ -9,6 +9,7 @@ import {
   ElCol,
   ElContainer,
   ElDatePicker,
+  ElDialog,
   ElDropdown,
   ElDropdownItem,
   ElDropdownMenu,
@@ -88,7 +89,8 @@ const components = [
   ElBreadcrumbItem,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+  ElDialog
 ];
 
 export function registerElementPlus(app: App): void {

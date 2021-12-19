@@ -6,7 +6,7 @@ import {
   requestUserInfoById,
   requestUserMenusById
 } from '@/service/login';
-import { menuToRoute } from '@/utils/menu-to-route';
+import { menuToRoute, userMenuToPermissions } from '@/utils/menu-to-route';
 import myStorage from '@/utils/my-storage';
 import { RouteRecordRaw } from 'vue-router';
 import { Module } from 'vuex';
@@ -19,7 +19,8 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: '',
       userInfo: {},
-      userMenu: []
+      userMenu: [],
+      permissions: []
     };
   },
   getters: {},
@@ -38,6 +39,9 @@ const loginModule: Module<ILoginState, IRootState> = {
         router.addRoute('main', route);
       }
       state.userMenu = userMenu;
+    },
+    changePermissions(state, permissions: string[]) {
+      state.permissions = permissions;
     }
   },
   actions: {
@@ -78,6 +82,11 @@ const loginModule: Module<ILoginState, IRootState> = {
         commit('changeUserInfo', userInfo);
       }
       if (userMenu) {
+        // 在初始化的时候将permissions传过去应该是最好的。（每次刷新）
+        // 但是permissions我们就不存储在本地了把？
+        const permissions = userMenuToPermissions(userMenu);
+
+        commit('changePermissions', permissions);
         commit('changeUserMenu', userMenu);
       }
     }

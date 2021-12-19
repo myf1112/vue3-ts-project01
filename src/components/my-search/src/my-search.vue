@@ -14,6 +14,7 @@
             <SearchFoot
               @resetClick="handleResetClick"
               @searchClick="handleSearchClick"
+              :pageName="pageName"
             ></SearchFoot>
           </div> </template
       ></MyFormVue>
@@ -32,6 +33,10 @@ export default defineComponent({
   props: {
     searchConfig: {
       type: Object as PropType<IFormConfig>,
+      required: true
+    },
+    pageName: {
+      type: String,
       required: true
     }
   },

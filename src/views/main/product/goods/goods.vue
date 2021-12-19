@@ -5,6 +5,7 @@
         :search-config="userSearchConfig"
         @handle-search-click="newSearchQuery"
         @handle-reset-click="newResetQuery"
+        :page-name="'goods'"
       ></mySearchVue>
     </div>
     <div class="table">
